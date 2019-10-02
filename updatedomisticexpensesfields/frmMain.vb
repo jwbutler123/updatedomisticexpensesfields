@@ -48,23 +48,26 @@
                             .SubItems.Add(fields(2).Replace(Chr(34), ""))    'county
 
                             If fields(3).Length > 0 Then
-                                Dim start_parts() As String = fields(3).Split("-"c)
+                                Dim start_parts() As String = fields(3).Split(" "c)
                                 year = CInt(txtFY.Text) - 1
 
                                 If newarea And CInt(cvbMonth(start_parts(0))) <= 9 Or Not newarea And CInt(cvbMonth(start_parts(0))) <= 9 Then
                                     year += 1
                                 End If
 
-                                Dim start_new As Date = Date.Parse(cvbMonth(start_parts(1)) & "/" & start_parts(0) & "/" & year.ToString)
+                                'Dim start_new As Date = Date.Parse(cvbMonth(start_parts(1)) & "/" & start_parts(0) & "/" & year.ToString)
+                                Dim start_new As Date = Date.Parse(cvbMonth(start_parts(0)) & "/" & start_parts(1) & "/" & year.ToString)
 
-                                Dim end_parts() As String = fields(4).Split("-"c)
+                                Dim end_parts() As String = fields(4).Split(" "c)
                                 year = CInt(txtFY.Text) - 1
 
-                                If newarea And CInt(cvbMonth(end_parts(1))) <= 9 Or Not newarea And CInt(cvbMonth(end_parts(1))) <= 9 Then
+                                'If newarea And CInt(cvbMonth(end_parts(1))) <= 9 Or Not newarea And CInt(cvbMonth(end_parts(1))) <= 9 Then
+                                If newarea And CInt(cvbMonth(end_parts(0))) <= 9 Or Not newarea And CInt(cvbMonth(end_parts(0))) <= 9 Then
                                     year += 1
                                 End If
 
-                                Dim end_new As Date = Date.Parse(cvbMonth(end_parts(1)) & "/" & end_parts(0) & "/" & year.ToString)
+                                'Dim end_new As Date = Date.Parse(cvbMonth(end_parts(1)) & "/" & end_parts(0) & "/" & year.ToString)
+                                Dim end_new As Date = Date.Parse(cvbMonth(end_parts(0)) & "/" & end_parts(1) & "/" & year.ToString)
 
                                 .SubItems.Add(start_new.ToShortDateString)
                                 .SubItems.Add(end_new.ToShortDateString)
